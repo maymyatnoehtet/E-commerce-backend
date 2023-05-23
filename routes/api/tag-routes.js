@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const { Tag, Product, ProductTag, Category } = require('../../models');
 
 // The `/api/tags` endpoint
 
@@ -34,14 +34,40 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a new tag
-router.post('/', (req, res) => {
-  // create a new tag
+router.post('/', async (req, res) => {
+  try {
+    const TagData = await Tag.create({
+      id: req.body.id,
+      tag_name: req.body.tag_name
+    });
+    res.status(200).json(TagData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 // Update an existing tag
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+// TODO Update an existing tag
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedTag = await Tag.update(
+      {
+        tag_name: req.body.tag_name,
+        where: { id: req.params.id }
+      }
+    );
+    
+    if (updatedTag[0] === 0) {
+      // If no rows were affected, the tag with the specified ID doesn't exist
+      return res.status(404).json({ error: 'Tag not found.' });
+    }
+
+    res.status(200).json({ message: 'Tag updated successfully.' });
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
+
 
 // Delete a tag
 router.delete('/:id', async (req, res) => {

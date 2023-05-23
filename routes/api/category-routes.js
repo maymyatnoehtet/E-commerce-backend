@@ -33,12 +33,37 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
-  // create a new category
+// Create a new category
+router.post('/', async (req, res) => {
+  try {
+    const categoryData = await Category.create({
+      id: req.body.id,
+      category_name: req.body.category_name
+    });
+    res.status(200).json(categoryData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
-router.put('/:id', (req, res) => {
-  // update a category by its `id` value
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedCategory = await Category.update(
+      {
+        category_name: req.body.category_name,
+        where: { id: req.params.id }
+      }
+    );
+    
+    if (updatedCategory[0] === 0) {
+      // If no rows were affected, the tag with the specified ID doesn't exist
+      return res.status(404).json({ error: 'Category not found.' });
+    }
+
+    res.status(200).json({ message: 'Category updated successfully.' });
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 // Delete a category
@@ -48,6 +73,7 @@ router.delete('/:id', async (req, res) => {
       where: {
         id: req.params.id,
       },
+      cascade: true
     });
     // If the category with the given id doesn't exist
     if(!CategoryData) {
