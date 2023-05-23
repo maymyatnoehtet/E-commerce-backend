@@ -46,12 +46,12 @@ router.put('/:id', (req, res) => {
 // Delete a tag
 router.delete('/:id', async (req, res) => {
   try {
-    const TagData = await Product.destroy({
+    const TagData = await Tag.destroy({
       where: {
         id: req.params.id,
       },
     });
-    // If the product with the given doesn't exist
+    // If the tag with the given id doesn't exist
     if(!TagData) {
       res.status(404).json({message: 'No tag found with that id!'});
       return;

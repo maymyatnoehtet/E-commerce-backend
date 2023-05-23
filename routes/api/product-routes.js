@@ -119,7 +119,7 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    // If the product with the given doesn't exist
+    // If the product with the given id doesn't exist
     if(!productData) {
       res.status(404).json({message: 'No product found with that id!'});
       return;
