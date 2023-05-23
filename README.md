@@ -35,3 +35,12 @@ To run the code,
 ```source db/schema.sql```
 ```npm run seed```
 ```node server.js```
+
+## Build With
+
+node: 16.20.0
+dotenv: 16.0.3,
+express: 4.18.2,
+mysql2: 3.3.1,
+nodemon: 2.0.22,
+sequelize: 6.31.1
