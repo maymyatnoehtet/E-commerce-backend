@@ -39,6 +39,7 @@ Product.init(
     // Use category id to link with the category table
     category_id: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: 'category',
         key: 'id',

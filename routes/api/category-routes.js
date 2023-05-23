@@ -46,23 +46,16 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    const updatedCategory = await Category.update(
-      {
-        category_name: req.body.category_name,
-        where: { id: req.params.id }
-      }
-    );
-    
-    if (updatedCategory[0] === 0) {
-      // If no rows were affected, the tag with the specified ID doesn't exist
-      return res.status(404).json({ error: 'Category not found.' });
-    }
-
-    res.status(200).json({ message: 'Category updated successfully.' });
+    const updatedCategory = await Category.update(req.body, {
+      where: { id: req.params.id },
+    });
+    !updatedCategory[0]
+      ? res.status(404).json({ message: "No category found with this id!" })
+      : res.status(200).json(updatedCategory);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json({ message: "Category update failed" });
   }
 });
 

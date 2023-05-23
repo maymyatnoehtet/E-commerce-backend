@@ -46,25 +46,17 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update an existing tag
-// TODO Update an existing tag
-router.put('/:id', async (req, res) => {
+// Update a tag by ID
+router.put("/:id", async (req, res) => {
   try {
-    const updatedTag = await Tag.update(
-      {
-        tag_name: req.body.tag_name,
-        where: { id: req.params.id }
-      }
-    );
-    
-    if (updatedTag[0] === 0) {
-      // If no rows were affected, the tag with the specified ID doesn't exist
-      return res.status(404).json({ error: 'Tag not found.' });
-    }
-
-    res.status(200).json({ message: 'Tag updated successfully.' });
+    const updatedTag = await Tag.update(req.body, {
+      where: { id: req.params.id },
+    });
+    !updatedTag[0]
+      ? res.status(404).json({ message: "No tag found with this id!" })
+      : res.status(200).json(updatedTag);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json({ message: "Tag update failed" });
   }
 });
 

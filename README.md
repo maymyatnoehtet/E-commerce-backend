@@ -25,3 +25,13 @@ THEN I am able to successfully create, update, and delete data in my database
 ```
 
 ## Database Models
+![Database Model](https://github.com/maymyatnoehtet/E-commerce-backend/blob/main/public/images/db_models.png)
+
+## Usage Instruction
+
+To run the code,
+```npm install```
+```mysql -u root -p```
+```source db/schema.sql```
+```npm run seed```
+```node server.js```
