@@ -2,7 +2,7 @@
 
 Link to Repository: https://github.com/maymyatnoehtet/E-commerce-backend
 
-Link to Video: 
+Link to Video: https://drive.google.com/file/d/1qDtQAkA7tvZjAVRu4gelqqE4S1t_Nxv0/view?usp=sharing
 
 ## User Story
 
