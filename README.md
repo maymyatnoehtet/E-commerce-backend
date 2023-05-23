@@ -1,5 +1,9 @@
 # E-commerce Backend
 
+Link to Repository: https://github.com/maymyatnoehtet/E-commerce-backend
+
+Link to Video: 
+
 ## User Story
 
 ```
@@ -28,6 +32,8 @@ THEN I am able to successfully create, update, and delete data in my database
 ![Database Model](https://github.com/maymyatnoehtet/E-commerce-backend/blob/main/public/images/db_models.png)
 
 ## Usage Instruction
+
+```git clone git@github.com:maymyatnoehtet/E-commerce-backend.git```
 
 To run the code,
 ```npm install```
